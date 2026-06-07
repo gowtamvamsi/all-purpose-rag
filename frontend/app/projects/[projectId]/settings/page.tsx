@@ -196,6 +196,8 @@ export default function ProjectSettings() {
                 <option value="gpt-4o">GPT-4o</option>
                 <option value="ollama/llama3">Local: Llama 3 (Ollama)</option>
                 <option value="ollama/phi3">Local: Phi-3 (Ollama)</option>
+                <option value="ollama/gemma4:e4b">Local: Gemma 4 (4B) (Ollama)</option>
+                <option value="ollama/gemma4:12b">Local: Gemma 4 (12B) (Ollama)</option>
               </select>
             </div>
 

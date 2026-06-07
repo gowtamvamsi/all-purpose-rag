@@ -63,6 +63,7 @@ async def create_conversation(
     )
     db.add(conv)
     await db.flush()
+    await db.refresh(conv)
     return conv
 
 @router.get("", response_model=list[ConversationResponse])
@@ -102,6 +103,7 @@ async def rename_conversation(
     if payload.title:
         conv.title = payload.title
     await db.flush()
+    await db.refresh(conv)
     return conv
 
 @router.delete("/{conversation_id}", status_code=status.HTTP_204_NO_CONTENT)

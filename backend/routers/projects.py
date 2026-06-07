@@ -50,6 +50,7 @@ async def create_project(
     )
     db.add(project)
     await db.flush()
+    await db.refresh(project)
     return project
 
 @router.get("", response_model=list[ProjectResponse])
@@ -91,6 +92,7 @@ async def update_project(
         project.retrieval_top_k = payload.retrieval_top_k
         
     await db.flush()
+    await db.refresh(project)
     return project
 
 @router.delete("/{project_id}", status_code=status.HTTP_204_NO_CONTENT)

@@ -87,19 +87,23 @@ class StorageService:
                     pass
                 return True
             return False
-        else:
+        elif self.use_s3:
             try:
                 self.s3_client.delete_object(Bucket=bucket, Key=key)
                 return True
             except Exception:
                 return False
+        else:
+            return False
 
     def get_file_bytes(self, bucket: str, key: str) -> bytes:
         if bucket == "local":
             with open(key, "rb") as f:
                 return f.read()
-        else:
+        elif self.use_s3:
             response = self.s3_client.get_object(Bucket=bucket, Key=key)
             return response["Body"].read()
+        else:
+            raise ValueError(f"S3 storage is not configured, and bucket '{bucket}' is not local.")
 
 storage_service = StorageService()
